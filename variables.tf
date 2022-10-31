@@ -1,4 +1,83 @@
-variable "task_definition" {
+variable "environment" {
   type    = string
-  default = "arn:aws:ecs:us-east-1:587370989282:task-definition/jazztech-task-default:1"
+  default = ""
+}
+
+variable "name" {
+  type    = string
+  default = ""
+}
+
+variable "owner" {
+  type    = string
+  default = ""
+}
+
+variable "cluster" {
+  type    = string
+  default = ""
+}
+
+variable "vpc_id" {
+  type    = string
+  default = ""
+}
+
+variable "iam_role" {
+  type    = string
+  default = ""
+}
+variable "desired_count" {
+  type    = number
+  default = null
+}
+
+variable "deployment_min_healthy_percent" {
+  type    = number
+  default = null
+}
+
+variable "deployment_max_percent" {
+  type    = number
+  default = null
+}
+
+variable "min_count" {
+  type    = number
+  default = null
+}
+
+variable "max_count" {
+  type    = number
+  default = null
+}
+
+variable "alb_listener" {
+  type    = string
+  default = ""
+}
+
+variable "alb_url" {
+  type    = string
+  default = ""
+}
+
+variable "fargate_cpu" {
+  type = number
+  default = null
+}
+
+variable "fargate_memory" {
+  type = number
+  default = null
+}
+
+variable "container_image" {
+  type = string
+  default = null
+}
+
+variable "app_port" {
+  type = number
+  default = null
 }
