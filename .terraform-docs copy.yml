@@ -1,0 +1,18 @@
+formatter: "markdown"
+
+recursive:
+  enabled: true
+  path: src
+
+output:
+  file: "README.md"
+  mode: replace
+
+settings:
+  color: false
+  description: true
+  hide-empty: true
+
+sort:
+  enabled: true
+  by: required
