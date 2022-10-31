@@ -1,6 +1,22 @@
 ################################################################################
 # ECS Module
 ################################################################################
+resource "aws_cloudwatch_log_group" "main" {
+  name = "/ecs/${var.name}-${var.environment}"
+  retention_in_days = 7
+  
+  tags {
+    tags = merge(
+      local.common_tags,
+      {
+        Name        = "tg${var.environment}${var.name}"
+        Project     = "${var.name}"
+        Environment = "${var.environment}"
+      }
+    )
+  }
+}
+
 resource "aws_ecs_task_definition" "main" {
   family = "${var.name}-${var.environment}"
   execution_role_arn = var.role_arn
