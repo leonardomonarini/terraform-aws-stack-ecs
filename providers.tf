@@ -5,7 +5,7 @@ terraform {
     organization = "JazzTech"
 
     workspaces {
-      name = var.name
+      name = "JazzTech"
     }
   }
   required_providers {

@@ -110,7 +110,7 @@ resource "aws_appautoscaling_target" "main" {
   max_capacity       = var.max_count
 
   depends_on = [
-    "aws_ecs_service.service"
+    aws_ecs_service.service
   ]
 }
 
