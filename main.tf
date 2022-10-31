@@ -76,10 +76,6 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_ecs_service" "service" {
-  lifecycle {
-    create_before_destory = true
-  }
-
   name                               = var.name
   cluster                            = var.cluster
   task_definition                    = aws_ecs_task_definition.main.id
