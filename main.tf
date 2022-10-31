@@ -81,18 +81,3 @@ resource "aws_appautoscaling_target" "main" {
     aws_ecs_service.service
   ]
 }
-
-resource "aws_lb_listener_rule" "main" {
-  listener_arn = var.alb_listener
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.main.arn
-  }
-
-  condition {
-    host_header {
-      values = "teste.com"
-    }
-  }
-}
