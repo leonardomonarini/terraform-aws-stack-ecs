@@ -64,7 +64,7 @@ variable "alb_listener" {
 
 variable "alb_url" {
   type    = string
-  default = ""
+  default = "terraform-module.com"
 }
 
 variable "fargate_cpu" {
