@@ -63,7 +63,8 @@ variable "alb_listener" {
 }
 
 variable "alb_url" {
-  type    = list(set(string))
+  type    = string
+  default = ""
 }
 
 variable "fargate_cpu" {

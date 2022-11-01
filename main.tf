@@ -92,7 +92,7 @@ resource "aws_lb_listener_rule" "main" {
 
   condition {
     host_header {
-      values = ["teste.com"]
+      values = ["${var.alb_url}"]
     }
   }
 }
