@@ -1,7 +1,7 @@
 variable "role_arn" {
-  type = string
+  type    = string
   default = ""
-  
+
 }
 variable "environment" {
   type    = string
@@ -68,21 +68,21 @@ variable "alb_url" {
 }
 
 variable "fargate_cpu" {
-  type = number
+  type    = number
   default = null
 }
 
 variable "fargate_memory" {
-  type = number
+  type    = number
   default = null
 }
 
 variable "container_image" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "app_port" {
-  type = number
+  type    = number
   default = null
 }

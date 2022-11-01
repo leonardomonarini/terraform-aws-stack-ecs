@@ -2,44 +2,44 @@
 # ECS Module
 ################################################################################
 resource "aws_cloudwatch_log_group" "main" {
-  name = "/ecs/${var.name}-${var.environment}"
+  name              = "/ecs/${var.name}-${var.environment}"
   retention_in_days = 7
-  tags {
+  tags = {
     tags = merge(
       local.common_tags,
       {
-        name        = "tg${var.environment}${var.name}"
-        project     = "${var.name}"
+        name    = "tg${var.environment}${var.name}"
+        project = "${var.name}"
       }
     )
   }
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family = "${var.name}-${var.environment}"
-  execution_role_arn = var.role_arn
-  network_mode = "awsvpc"
+  family                   = "${var.name}-${var.environment}"
+  execution_role_arn       = var.role_arn
+  network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu = var.fargate_cpu
-  memory = var.fargate_memory
+  cpu                      = var.fargate_cpu
+  memory                   = var.fargate_memory
 
-  container_definitions = jsonencode ([
+  container_definitions = jsonencode([
     {
-      name = var.name
-      image = var.container_image
-      cpu = var.fargate_cpu
+      name   = var.name
+      image  = var.container_image
+      cpu    = var.fargate_cpu
       memory = var.fargate_memory
       port_mappings = [
         {
           container_port = var.app_port
-          host_port = var.app_port
+          host_port      = var.app_port
         }
       ]
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group = "/ecs/${var.name}-${var.environment}"
-          awslogs-region = "us-east-1"
+          awslogs-group     = "/ecs/${var.name}-${var.environment}"
+          awslogs-region    = "us-east-1"
           aws-stream-prefix = "ecs"
         }
       }
@@ -60,12 +60,12 @@ resource "aws_lb_target_group" "main" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
-  tags {
+  tags = {
     tags = merge(
       local.common_tags,
       {
-        name        = "tg${var.environment}${var.name}"
-        project     = "${var.name}"
+        name    = "tg${var.environment}${var.name}"
+        project = "${var.name}"
       }
     )
   }
@@ -85,12 +85,12 @@ resource "aws_ecs_service" "service" {
     container_name   = var.name
     container_port   = 80
   }
-  tags {
+  tags = {
     tags = merge(
       local.common_tags,
       {
-        name        = "tg${var.environment}${var.name}"
-        project     = "${var.name}"
+        name    = "tg${var.environment}${var.name}"
+        project = "${var.name}"
       }
     )
   }
