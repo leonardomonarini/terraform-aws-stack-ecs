@@ -4,15 +4,7 @@
 resource "aws_cloudwatch_log_group" "main" {
   name              = "/ecs/${var.name}-${var.environment}"
   retention_in_days = 7
-  tags = {
-    tags = merge(
-      local.common_tags,
-      {
-        name    = "tg${var.environment}${var.name}"
-        project = "${var.name}"
-      }
-    )
-  }
+  tags = local.common_tags
 }
 
 resource "aws_ecs_task_definition" "main" {
@@ -60,15 +52,7 @@ resource "aws_lb_target_group" "main" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
-  tags = {
-    tags = merge(
-      local.common_tags,
-      {
-        name    = "tg${var.environment}${var.name}"
-        project = "${var.name}"
-      }
-    )
-  }
+  tags = local.common_tags
 }
 
 resource "aws_ecs_service" "service" {
@@ -85,15 +69,7 @@ resource "aws_ecs_service" "service" {
     container_name   = var.name
     container_port   = 80
   }
-  tags = {
-    tags = merge(
-      local.common_tags,
-      {
-        name    = "tg${var.environment}${var.name}"
-        project = "${var.name}"
-      }
-    )
-  }
+  tags = local.common_tags
 }
 
 resource "aws_appautoscaling_target" "main" {
