@@ -86,3 +86,13 @@ variable "app_port" {
   type    = number
   default = null
 }
+
+variable "security_group" {
+  type    = string
+  default = ""
+}
+
+variable "subnetids" {
+  type    = list
+  default = []
+}
