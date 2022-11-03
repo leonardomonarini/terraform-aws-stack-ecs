@@ -23,8 +23,9 @@ resource "aws_ecs_task_definition" "main" {
       memory = var.fargate_memory
       port_mappings = [
         {
-          container_port = var.app_port
-          host_port      = var.app_port
+          containerPort = 80
+          hostPort      = 80
+          protocol      = "tcp"
         }
       ]
       logConfiguration = {
