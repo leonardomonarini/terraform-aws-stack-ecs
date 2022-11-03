@@ -65,7 +65,11 @@ resource "aws_ecs_service" "service" {
   deployment_minimum_healthy_percent = var.deployment_min_healthy_percent
   deployment_maximum_percent         = var.deployment_max_percent
   iam_role                           = var.iam_role
-
+  
+  network_configuration {
+    subnets         = var.subnets.*.id
+    security_groups = var.security_group
+  }
   load_balancer {
     target_group_arn = aws_lb_target_group.main.id
     container_name   = var.name
