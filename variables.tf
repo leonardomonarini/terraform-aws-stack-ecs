@@ -88,8 +88,8 @@ variable "app_port" {
 }
 
 variable "security_group" {
-  type    = string
-  default = ""
+  type    = list
+  default = []
 }
 
 variable "subnetids" {
