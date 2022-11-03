@@ -67,7 +67,7 @@ resource "aws_ecs_service" "service" {
   iam_role                           = var.iam_role
   
   network_configuration {
-    subnets         = var.subnets.*.id
+    subnets         = var.subnetids
     security_groups = var.security_group
   }
   load_balancer {
