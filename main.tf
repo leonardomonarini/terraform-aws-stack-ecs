@@ -32,6 +32,7 @@ resource "aws_ecs_task_definition" "main" {
         options = {
           awslogs-group     = "/ecs/${var.name}-${var.environment}"
           awslogs-region    = "us-east-1"
+          awslogs-stream-prefix = "ecs"
         }
       }
     }
