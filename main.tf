@@ -42,6 +42,7 @@ resource "aws_ecs_task_definition" "main" {
 
 resource "aws_lb_target_group" "main" {
   name = "tg${var.environment}${var.name}"
+  target_type = "ip"
   health_check {
     healthy_threshold   = "3"
     interval            = "30"
