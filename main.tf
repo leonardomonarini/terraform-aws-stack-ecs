@@ -8,7 +8,7 @@ resource "aws_cloudwatch_log_group" "main" {
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family                   = "${var.name}-${var.environment}"
+  family                   = "${var.name}-1-${var.environment}"
   execution_role_arn       = var.role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -21,11 +21,10 @@ resource "aws_ecs_task_definition" "main" {
       image  = var.container_image
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
-      port_mappings = [
+      portMappings = [
         {
           containerPort = 80
           hostPort      = 80
-          protocol      = "tcp"
         }
       ]
       logConfiguration = {
