@@ -46,7 +46,7 @@ resource "aws_service_discovery_service" "main" {
 
     dns_records {
       ttl  = 60
-      type = A
+      type = "A"
     }
 
     routing_policy = "MULTIVALUE"
