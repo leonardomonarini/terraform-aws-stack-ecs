@@ -72,7 +72,7 @@ resource "aws_ecs_service" "service" {
   }
 
   service_registries {
-    registry_arn = aws_service_discovery_service.test-service.arn
+    registry_arn = aws_service_discovery_service.main.arn
   }
 
   tags = local.common_tags
