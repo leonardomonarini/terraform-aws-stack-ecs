@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "main" {
 
   container_definitions = jsonencode([
     {
-      name   = var.name
+      name   = "${var.name}-${var.environment}"
       image  = var.container_image
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
