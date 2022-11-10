@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "main" {
 
   container_definitions = jsonencode([
     {
-      name   = var.name
+      name   = "${var.name}-${var.environment}"
       image  = var.container_image
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name = "tg${var.environment}${var.name}"
+  name = "tg-${var.environment}${var.name}"
   target_type = "ip"
   health_check {
     healthy_threshold   = "3"
