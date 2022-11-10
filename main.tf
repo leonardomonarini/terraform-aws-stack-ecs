@@ -57,13 +57,15 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_ecs_service" "service" {
-  name                               = var.name
+  name                               = "${var.name}-${var.environment}"
   cluster                            = var.cluster
   task_definition                    = aws_ecs_task_definition.main.id
   desired_count                      = var.desired_count
   deployment_minimum_healthy_percent = var.deployment_min_healthy_percent
   deployment_maximum_percent         = var.deployment_max_percent
   iam_role                           = var.iam_role
+  launch_type                        = "FARGATE"
+  scheduling_strategy                = "REPLICA"
 
   
   network_configuration {
