@@ -8,7 +8,7 @@ resource "aws_cloudwatch_log_group" "main" {
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family                   = "${var.name}-2-${var.environment}"
+  family                   = "${var.name}-${var.environment}"
   execution_role_arn       = var.role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -64,8 +64,6 @@ resource "aws_ecs_service" "service" {
   deployment_minimum_healthy_percent = var.deployment_min_healthy_percent
   deployment_maximum_percent         = var.deployment_max_percent
   iam_role                           = var.iam_role
-  launch_type                        = "FARGATE"
-  scheduling_strategy                = "REPLICA"
 
   
   network_configuration {
