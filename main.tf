@@ -8,7 +8,7 @@ resource "aws_cloudwatch_log_group" "main" {
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family                   = "${var.name}-${var.environment}"
+  family                   = "${var.name}-2-${var.environment}"
   execution_role_arn       = var.role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
