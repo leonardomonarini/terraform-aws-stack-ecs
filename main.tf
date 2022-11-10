@@ -48,7 +48,7 @@ resource "aws_lb_target_group" "main" {
     protocol            = "HTTP"
     timeout             = "3"
     path                = "/healthz"
-    unhealthy_threshold = "2"
+    unhealthy_threshold = "5"
   }
   port     = 80
   protocol = "HTTP"
