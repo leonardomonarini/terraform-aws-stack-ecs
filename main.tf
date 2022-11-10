@@ -74,7 +74,7 @@ resource "aws_ecs_service" "service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.main.id
-    container_name   = var.name
+    container_name   = "${var.name}-${var.environment}"
     container_port   = 80
   }
   tags = local.common_tags
