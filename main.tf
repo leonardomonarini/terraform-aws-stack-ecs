@@ -8,7 +8,7 @@ resource "aws_cloudwatch_log_group" "main" {
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family                   = "${var.name}-3-${var.environment}"
+  family                   = "${var.name}-${var.environment}"
   execution_role_arn       = var.role_arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "main" {
 
   container_definitions = jsonencode([
     {
-      name   = "${var.name}-${var.environment}"
+      name   = var.name
       image  = var.container_image
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
@@ -57,7 +57,7 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_ecs_service" "service" {
-  name                               = "${var.name}-${var.environment}"
+  name                               = var.name
   cluster                            = var.cluster
   task_definition                    = aws_ecs_task_definition.main.id
   desired_count                      = var.desired_count
