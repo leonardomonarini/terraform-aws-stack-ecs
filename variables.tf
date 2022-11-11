@@ -68,8 +68,8 @@ variable "alb_url" {
 }
 
 variable "alb_cname" {
-  type    = list(any)
-  default = []
+  type    = string
+  default = ""
 }
 
 variable "fargate_cpu" {
