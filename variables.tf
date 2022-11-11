@@ -67,6 +67,11 @@ variable "alb_url" {
   default = ""
 }
 
+variable "alb_cname" {
+  type    = list(any)
+  default = []
+}
+
 variable "fargate_cpu" {
   type    = number
   default = null
@@ -88,11 +93,16 @@ variable "app_port" {
 }
 
 variable "security_group" {
-  type    = list
+  type    = list(any)
   default = []
 }
 
 variable "subnetids" {
-  type    = list
+  type    = list(any)
   default = []
+}
+
+variable "dns_zone_id" {
+  type    = string
+  default = ""
 }
