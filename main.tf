@@ -4,7 +4,7 @@
 resource "aws_cloudwatch_log_group" "main" {
   name              = "/ecs/${var.name}-${var.environment}"
   retention_in_days = 7
-  tags = local.common_tags
+  tags              = local.common_tags
 }
 
 resource "aws_ecs_task_definition" "main" {
@@ -30,8 +30,8 @@ resource "aws_ecs_task_definition" "main" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group     = "/ecs/${var.name}-${var.environment}"
-          awslogs-region    = "us-east-1"
+          awslogs-group         = "/ecs/${var.name}-${var.environment}"
+          awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
       }
@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name = "tg-${var.environment}${var.name}"
+  name        = "tg-${var.environment}${var.name}"
   target_type = "ip"
   health_check {
     healthy_threshold   = "3"
@@ -53,7 +53,7 @@ resource "aws_lb_target_group" "main" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
-  tags = local.common_tags
+  tags     = local.common_tags
 }
 
 resource "aws_ecs_service" "service" {
@@ -67,11 +67,11 @@ resource "aws_ecs_service" "service" {
   launch_type                        = "FARGATE"
   scheduling_strategy                = "REPLICA"
 
-  
+
   network_configuration {
-    subnets           = var.subnetids
-    security_groups   = var.security_group
-    assign_public_ip  = true
+    subnets          = var.subnetids
+    security_groups  = var.security_group
+    assign_public_ip = true
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.main.id
@@ -107,4 +107,12 @@ resource "aws_lb_listener_rule" "main" {
       values = ["${var.alb_url}"]
     }
   }
+}
+
+resource "aws_route53_record" "main" {
+  zone_id = var.dns_zone_id
+  name    = var.alb_url
+  type    = "CNAME"
+  ttl     = "60"
+  records = ["${var.alb_cname}"]
 }
